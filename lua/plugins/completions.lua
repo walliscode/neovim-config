@@ -3,10 +3,6 @@ return {
   {
     'hrsh7th/cmp-nvim-lsp',
   },
-  -- Github co pilot
-  {
-    "github/copilot.vim"
-  },
   {
     'L3MON4D3/LuaSnip',
     dependencies = {
@@ -38,11 +34,29 @@ return {
           ['<CR>'] = cmp.mapping.confirm { select = true },
         },
         sources = cmp.config.sources({
-         -- { name = 'nvim_lsp' },
+          -- { name = 'nvim_lsp' },
           { name = 'luasnip' }, -- For luasnip users.
         }, {
           { name = 'buffer' },
         }),
+      }
+    end,
+  },
+  -- Github co pilot
+  {
+    'github/copilot.vim',
+  },
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    branch = 'canary',
+    dependencies = {
+      { 'github/copilot.vim' },
+      { 'nvim-lua/plenary.nvim' },
+    },
+    config = function()
+      require('CopilotChat').setup {
+        debug = true,
+        vim.keymap.set('n','z',':CopilotChatToggle<CR>',{})
       }
     end,
   },
